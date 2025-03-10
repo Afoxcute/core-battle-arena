@@ -571,7 +571,7 @@ const GameInterface = () => {
                 <span>Stake</span>
               </div>
               <span className='font-bold text-yellow-500'>
-                {formatEther(gameDetails?.stake)} ETH
+                {formatEther(gameDetails?.stake)} tCORE
               </span>
             </div>
             {gameDetails?.players.map((player, index) => (
