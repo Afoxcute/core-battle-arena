@@ -228,7 +228,7 @@ const GameHistoryCard:React.FC<GameHistoryCardProps> = ({ game, userAddress }) =
                 </span>
               </div>
               <p className='text-sm text-slate-400'>
-                {gameTypeInfo.name} • {formattedStake} ETH Stake
+                {gameTypeInfo.name} • {formattedStake} tCORE Stake
               </p>
             </div>
           </div>
