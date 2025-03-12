@@ -51,7 +51,6 @@ The application is structured as follows:
 
 ### Key Components
 
-- **Smart Contract**: `rockpaperscissors.sol` - Contains the game logic, including game creation, joining, and move handling.
 - **Frontend Pages**: 
   - `src/pages/index.tsx`: Home page.
   - `src/pages/game.tsx`: Game creation and joining interface.
