@@ -7,8 +7,6 @@ This is a decentralized Rock-Paper-Scissors game built on the CoreDao network. T
 - [Getting Started](#getting-started)
 - [Features](#features)
 - [Architecture](#architecture)
-- [Team Information](#team-information)
-- [License](#license)
 
 ## Getting Started
 
