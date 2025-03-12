@@ -7,6 +7,7 @@ This is a decentralized Rock-Paper-Scissors game built on the CoreDao network. T
 - [Getting Started](#getting-started)
 - [Features](#features)
 - [Architecture](#architecture)
+- Smart Contract Repository           https://github.com/Afoxcute/contract/tree/main
 
 ## Getting Started
 
