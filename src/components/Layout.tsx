@@ -7,15 +7,10 @@ import { Home, GamepadIcon, History } from 'lucide-react';
 import { useAccount } from 'wagmi';
 import { toast } from 'react-hot-toast'; 
 import Image from 'next/image';
-import { useConnect as useParticleConnect } from '@particle-network/auth-core-modal';
-import { AuthCoreEvent, getLatestAuthType, isSocialAuthType, particleAuth } from '@particle-network/auth-core';
 import { useConnect, useDisconnect } from 'wagmi';
 import { useEffect, useMemo } from 'react';
 import { ConnectButton, connectorsForWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { argentWallet, coinbaseWallet, imTokenWallet, injectedWallet, ledgerWallet, metaMaskWallet, omniWallet, rainbowWallet, trustWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
-
-import { ParticleNetwork } from '@particle-network/auth';
-import { particleWallet } from '@particle-network/rainbowkit-ext';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
