@@ -9,11 +9,6 @@
     "vite": "vite"
   },
   "dependencies": {
-    "@particle-network/analytics": "^1.0.1",
-    "@particle-network/auth": "^1.2.1",
-    "@particle-network/auth-core-modal": "^1.5.0",
-    "@particle-network/connectkit": "^2.0.9",
-    "@particle-network/rainbowkit-ext": "^1.2.0",
     "@rainbow-me/rainbowkit": "^2.0.1",
     "@tanstack/react-query": "^5.25.0",
     "lucide-react": "^0.456.0",
