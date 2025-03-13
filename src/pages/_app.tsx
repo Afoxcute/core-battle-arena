@@ -11,7 +11,6 @@ import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 import { config } from "../wagmi";
 import Layout from "../components/Layout";
-import { ConnectButton, ConnectKitProvider } from "@particle-network/connectkit";
 
 const client = new QueryClient();
 
@@ -26,14 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Layout>
         </RainbowKitProvider>
       </QueryClientProvider>
-    </WagmiProvider>
-    //       <ConnectKitProvider config={config}>
-    //         <ConnectButton />
-    //         <Toaster position='top-right' reverseOrder={false} />
-    //         <Layout>
-    //         <Component {...pageProps} />
-    //       </Layout>
-    // </ConnectKitProvider>
   );
 }
 
