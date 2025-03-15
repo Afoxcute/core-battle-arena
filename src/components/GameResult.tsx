@@ -1,5 +1,5 @@
 // import { useReadContract } from "wagmi";
-// import { contractAddress, contractAbi } from "../constants/contractInfo";
+// import { contractAddress, contractAbi } from "../constants/contractinfomainnet";
 
 // export default function GameResult({ gameData, setGameState }) {
 //   const {

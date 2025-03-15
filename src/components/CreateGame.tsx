@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { Trophy, Coins, Swords, Timer, Info } from 'lucide-react';
 import { parseEther } from 'viem';
 import { useWriteContract, useWaitForTransactionReceipt, useWatchContractEvent } from 'wagmi';
-import { abi, contractAddress } from '../constants/contractInfo';
+import { useContractInfo } from '../hooks/useContractInfo';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 import toast from 'react-hot-toast';
 import { extractErrorMessages } from '../utils';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -35,6 +36,8 @@ const GAME_TYPES = [
 ];
 
 export default function CreateGame() {
+    const { abi, contractAddress } = useContractInfo();
+    const { tokenSymbol } = useNetworkInfo();
     const { data: hash, error, isPending, writeContract } = useWriteContract();
 
           useWatchContractEvent({
@@ -180,16 +183,16 @@ export default function CreateGame() {
               min='0'
               value={stakeAmount}
               onChange={(e) => setStakeAmount(e.target.value)}
-              placeholder='Enter tCORE amount'
+              placeholder={`Enter ${tokenSymbol} amount`}
               className='w-full pl-10 pr-16 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-white'
             />
             <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-              <span className='text-yellow-400'>tCORE</span>
+              <span className='text-yellow-400'>{tokenSymbol}</span>
             </div>
           </div>
           <p className='flex items-center text-sm text-gray-400'>
             <Info className='w-4 h-4 mr-1' />
-            Stake must be greater than 0 tCORE
+            Stake must be greater than 0 {tokenSymbol}
           </p>
         </div>
 

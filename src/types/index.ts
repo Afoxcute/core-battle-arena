@@ -23,6 +23,7 @@ export interface GameSearchCardProps {
 export interface GameHistoryCardProps {
   game: Game;
   userAddress: `0x${string}` | undefined;
+  tokenSymbol: string;
 }
 
 export type MoveType = 'Rock' | 'Paper' | 'Scissors';

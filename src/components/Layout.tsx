@@ -8,9 +8,10 @@ import { useAccount } from 'wagmi';
 import { toast } from 'react-hot-toast'; 
 import Image from 'next/image';
 import { useConnect, useDisconnect } from 'wagmi';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ConnectButton, connectorsForWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { argentWallet, coinbaseWallet, imTokenWallet, injectedWallet, ledgerWallet, metaMaskWallet, omniWallet, rainbowWallet, trustWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -41,7 +42,34 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
   const { isConnected } = useAccount();
   const router = useRouter(); // Initialize useRouter
+  const { 
+    chainId, 
+    isMainnet, 
+    isTestnet, 
+    networkName, 
+    networkClass, 
+    tokenSymbol, 
+    isMounted 
+  } = useNetworkInfo();
 
+  // Show a toast notification when network changes
+  useEffect(() => {
+    // Only run in browser environment
+    if (isMounted && chainId) {
+      if (isMainnet || isTestnet) {
+        toast.success(`Connected to ${networkName} (${tokenSymbol})`, {
+          icon: '🌐',
+          id: 'network-change',
+        });
+      } else {
+        toast.error(`Connected to unsupported network. Please switch to Core Mainnet or Core Testnet.`, {
+          icon: '⚠️',
+          id: 'network-change',
+          duration: 5000,
+        });
+      }
+    }
+  }, [chainId, networkName, isMounted, isMainnet, isTestnet, tokenSymbol]);
 
   const handleLinkClick = (path: string) => {
     if (!isConnected && path !== '/') {
@@ -64,7 +92,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             />
             <span className="text-gradient font-bold text-lg">CORE BATTLE ARENA</span>
           </div>
-          <ConnectButton />
+          <div className="flex items-center gap-3">
+            {isMounted && isConnected && (
+              <div className={`text-xs px-2 py-1 rounded-full ${networkClass}`}>
+                {networkName} ({tokenSymbol})
+              </div>
+            )}
+            <ConnectButton />
+          </div>
         </div>
       </header>
 

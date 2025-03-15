@@ -29,7 +29,8 @@ import {
   useWatchContractEvent,
   useWriteContract,
 } from 'wagmi';
-import { abi, contractAddress } from '../../constants/contractInfo';
+import { useContractInfo } from '../../hooks/useContractInfo';
+import { useNetworkInfo } from '../../hooks/useNetworkInfo';
 import { extractErrorMessages } from '../../utils';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
@@ -39,6 +40,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 const GameInterface = () => {
   const [refreshData, setRefreshData] = useState('');
+  const { abi, contractAddress } = useContractInfo();
+  const { tokenSymbol } = useNetworkInfo();
 
   const router = useRouter();
   const account = useAccount();
@@ -228,21 +231,21 @@ const GameInterface = () => {
     switch (Number(type)) {
       case 0:
         return {
-          name: 'Quick Match',
+          name: 'LIGHTNING DUEL',
           rounds: 1,
           icon: <Gamepad2 className='h-6 w-6 text-emerald-500' />,
           bgColor: 'bg-emerald-500/10',
         };
       case 1:
         return {
-          name: 'Best of Three',
-          rounds: 3,
+          name: 'WARRIOR CLASH',
+          rounds: 2,
           icon: <Swords className='h-6 w-6 text-blue-500' />,
           bgColor: 'bg-blue-500/10',
         };
       case 2:
         return {
-          name: 'Championship',
+          name: 'EPIC TOURNAMENT',
           rounds: 5,
           icon: <Crown className='h-6 w-6 text-yellow-500' />,
           bgColor: 'bg-yellow-500/10',
@@ -501,7 +504,7 @@ const GameInterface = () => {
                   }
                 />
                 <span className='text-sm'>
-                  Round {gameDetails?.roundsPlayed + 1}/{gameType.rounds}
+                  Round {gameEnded ? Math.min(gameDetails?.roundsPlayed, gameType.rounds) : gameDetails?.roundsPlayed + 1}/{gameType.rounds}
                 </span>
               </div>
             </div>
@@ -571,7 +574,7 @@ const GameInterface = () => {
                 <span>Stake</span>
               </div>
               <span className='font-bold text-yellow-500'>
-                {formatEther(gameDetails?.stake)} tCORE
+                {formatEther(gameDetails?.stake)} {tokenSymbol}
               </span>
             </div>
             {gameDetails?.players.map((player, index) => (

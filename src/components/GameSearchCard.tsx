@@ -13,6 +13,7 @@ import {
 import { formatEther } from 'viem';
 import Link from 'next/link';
 import { GameSearchCardProps } from '../types';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 
 const GameSearchCard: React.FC<GameSearchCardProps> = ({
   game,
@@ -20,6 +21,8 @@ const GameSearchCard: React.FC<GameSearchCardProps> = ({
   isLoading,
   userAddress,
 }) => {
+  const { tokenSymbol } = useNetworkInfo();
+
   const getGameTypeInfo = (type: number) => {
     switch (Number(type)) {
       case 0:
@@ -31,7 +34,7 @@ const GameSearchCard: React.FC<GameSearchCardProps> = ({
       case 1:
         return {
           name: 'WARRIOR CLASH',
-          rounds: 3,
+          rounds: 2,
           icon: <Swords className='h-5 w-5 text-blue-500' />,
         };
       case 2:
@@ -119,7 +122,7 @@ const GameSearchCard: React.FC<GameSearchCardProps> = ({
             <div className='mt-1 flex items-center gap-3'>
               <div className='flex items-center gap-1.5 text-gray-400'>
                 <CircleDollarSign className='h-4 w-4 text-yellow-500' />
-                <span>{formattedStake} tCORE</span>
+                <span>{formattedStake} {tokenSymbol}</span>
               </div>
               <div className='flex items-center gap-1.5 text-gray-400'>
                 {hasSecondPlayer ? (

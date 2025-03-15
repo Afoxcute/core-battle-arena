@@ -16,7 +16,8 @@ import {
 } from 'lucide-react';
 import { formatEther } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
-import { abi, contractAddress } from '../constants/contractInfo';
+import { useContractInfo } from '../hooks/useContractInfo';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Game, GameHistoryCardProps } from '../types';
@@ -26,6 +27,8 @@ import { Game, GameHistoryCardProps } from '../types';
 const GameHistory = () => {
   const account = useAccount()
   const router = useRouter();
+  const { abi, contractAddress } = useContractInfo();
+  const { tokenSymbol } = useNetworkInfo();
 
     const gamesIdResult = useReadContract({
       abi,
@@ -62,6 +65,7 @@ const GameHistory = () => {
             key={game.gameId.toString()}
             game={game}
             userAddress={account.address}
+            tokenSymbol={tokenSymbol}
           />
         ))}
       {gamesResult && gamesResult.length < 1 && (
@@ -90,7 +94,7 @@ const GameHistory = () => {
 
 // 
 
-const GameHistoryCard:React.FC<GameHistoryCardProps> = ({ game, userAddress }) => {
+const GameHistoryCard:React.FC<GameHistoryCardProps> = ({ game, userAddress, tokenSymbol }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
 
@@ -104,19 +108,19 @@ const GameHistoryCard:React.FC<GameHistoryCardProps> = ({ game, userAddress }) =
     switch (Number(type)) {
       case 0:
         return {
-          name: 'Quick Match',
+          name: 'LIGHTNING DUEL',
           rounds: 1,
           icon: <Gamepad2 className='w-5 h-5 text-emerald-500' />,
         };
       case 1:
         return {
-          name: 'Best of Three',
-          rounds: 3,
+          name: 'WARRIOR CLASH',
+          rounds: 2,
           icon: <Swords className='w-5 h-5 text-blue-500' />,
         };
       case 2:
         return {
-          name: 'Championship',
+          name: 'EPIC TOURNAMENT',
           rounds: 5,
           icon: <Trophy className='w-5 h-5 text-yellow-500' />,
         };
@@ -228,7 +232,7 @@ const GameHistoryCard:React.FC<GameHistoryCardProps> = ({ game, userAddress }) =
                 </span>
               </div>
               <p className='text-sm text-slate-400'>
-                {gameTypeInfo.name} • {formattedStake} tCORE Stake
+                {gameTypeInfo.name} • {formattedStake} {tokenSymbol} Stake
               </p>
             </div>
           </div>

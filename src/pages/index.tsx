@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { useAccount, useConnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 
 import Link from "next/link";
 import { Gamepad2, Wallet, Sword, ScrollText, Shield, Coins, Trophy, Users } from 'lucide-react';
@@ -10,7 +11,8 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
     const { isConnected } = useAccount();
-      const { connect } = useConnect();
+    const { connect } = useConnect();
+    const { tokenSymbol } = useNetworkInfo();
 
   return (
     <>
@@ -42,9 +44,9 @@ const Home: NextPage = () => {
             <div className='bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1'>
               <div className='flex items-center space-x-3 mb-2'>
                 <Coins className='w-6 h-6 text-yellow-400 animate-pulse' />
-                <h2 className='text-xl font-semibold text-white'>Stake tCORE</h2>
+                <h2 className='text-xl font-semibold text-white'>Stake {tokenSymbol}</h2>
               </div>
-              <p className='text-gray-400'>Bet your tCORE tokens and win big in thrilling battles!</p>
+              <p className='text-gray-400'>Bet your {tokenSymbol} tokens and win big in thrilling battles!</p>
             </div>
 
             <div className='bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-purple-500 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1'>

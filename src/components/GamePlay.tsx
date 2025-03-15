@@ -1,6 +1,6 @@
 // import { useState, useEffect } from "react";
 // import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-// import { contractAddress, contractAbi } from "../constants/contractInfo";
+// import { contractAddress, contractAbi } from "../constants/contractinfomainnet";
 // import { toast } from "react-hot-toast";
 
 // export default function GamePlay({ gameData, setGameState, setGameData }) {

@@ -12,7 +12,8 @@ import {
 } from 'lucide-react';
 import { formatEther, parseEther } from 'viem';
 import { useAccount, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { abi, contractAddress } from '../constants/contractInfo';
+import { useContractInfo } from '../hooks/useContractInfo';
+import { useNetworkInfo } from '../hooks/useNetworkInfo';
 import GameSearchCard from './GameSearchCard';
 import toast from 'react-hot-toast';
 import { extractErrorMessages } from '../utils';
@@ -21,6 +22,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 
 export default function JoinGame() {
+      const { abi, contractAddress } = useContractInfo();
+      const { tokenSymbol } = useNetworkInfo();
       const {
         data: hash,
         error,
